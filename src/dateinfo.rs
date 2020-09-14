@@ -89,6 +89,7 @@ impl<'a, 'b> fmt::Display for FormattedDate<'a, 'b> {
                             },
                             _ => { f.write_str("d"); },
                         };
+                        is_expr = false;
                     },
 
                     'j' => {
@@ -97,6 +98,7 @@ impl<'a, 'b> fmt::Display for FormattedDate<'a, 'b> {
                             '0' => write!(f, "{:0>3}", day_of_year),
                             _ => f.write_str("j"),
                         };
+                        is_expr = false;
                     },
                     
                     _ => { write!(f, "{}", c); },
