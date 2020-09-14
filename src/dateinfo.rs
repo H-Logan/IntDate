@@ -67,7 +67,13 @@ impl DateInfo {
                     },
                     'd' => {
                         match last_char {
-                            '%' => output.push_str(&self.weekday.name()[..3]),
+                            '%' => {
+                                if &self.weekday.name() == &"Thursday" {
+                                    output.push_str(&self.weekday.name()[..5])
+                                } else {
+                                    output.push_str(&self.weekday.name()[..3])
+                                }
+                            },
                             '0' => output.push_str(
                                 &format!("{:0>2}", self.day)),
                             '-' => output.push_str(&self.day.to_string()),
