@@ -41,7 +41,7 @@ impl<'a, 'b> fmt::Display for FormattedDate<'a, 'b> {
                         is_expr = false;
                     },
                     'y' => {
-                        f.write_str(&year.to_string()[..3]);
+                        fmt::Display::fmt(&(year % 100), f);
                         is_expr = false;
                     },
 
