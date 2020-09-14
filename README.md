@@ -23,7 +23,7 @@ fn main() {
     let num = 42_433; // Friday, March 4th, 2016
     let date = idate!(num);
     
-    date.printf("ISO 8601 Standard Date Format: %Y-%0m-%0d");
+    println!("{}", date.format("ISO 8601 Standard Date Format: %Y-%0m-%0d"));
 }
 ```
 
