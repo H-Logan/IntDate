@@ -123,7 +123,7 @@ impl DateInfo {
         output
     }
 
-    pub fn printf(&self, input: &str) {
-        println!("{}", Self::build_fdate(self, input));
+    pub fn format(&self, input: &str) -> String {
+        self.build_fdate(input)
     }
 }

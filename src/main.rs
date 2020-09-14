@@ -17,5 +17,5 @@ fn main() {
     let num = 42433; // Friday, March 4th, 2016
     let date = idate!(num);
 
-    date.printf("This is a test for %M %.d, %Y.");
+    println!("{}", date.format("This is a test for %M %.d, %Y."));
 }
