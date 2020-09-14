@@ -17,5 +17,5 @@ fn main() {
     let num = 42433; // Friday, March 4th, 2016
     let date = idate!(num);
 
-    println!("{}", date.format("This is a test for %M %.d, %Y."));
+    println!("{}", date.format("ISO 8601 Standard Date Format: %Y-%0m-%0d"));
 }

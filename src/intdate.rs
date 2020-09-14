@@ -5,6 +5,7 @@ use crate::dateinfo::DateInfo;
 use crate::month::Month;
 use crate::weekday::Weekday;
 
+
 pub struct IntDate {
     value: u32,
 }
@@ -20,9 +21,7 @@ impl IntDate {
         loop {
             let leap_year = Self::is_leap_year(years) as u32;
 
-            if days <= 366 + leap_year {
-                break;
-            }
+            if days <= 366 + leap_year { break; }
 
             days -= 365 + leap_year;
             years += 1;
@@ -46,7 +45,8 @@ impl IntDate {
                 break;
             }
 
-            length += (m.name() == "February" && Self::is_leap_year(year.into())) as u16;
+            length += (m.name() == "February"
+                && Self::is_leap_year(year.into())) as u16;
 
             days -= length;
         }
@@ -58,11 +58,13 @@ impl IntDate {
         let t = [0, 3, 2, 5, 0, 3, 5, 1, 4, 6, 2, 4];
         year -= (month < 3) as u16;
 
-        ((year + (year as f32 / 4.).floor() as u16 - (year as f32 / 100.).floor() as u16
+        (( year
+            + (year as f32 / 4.).floor() as u16
+            - (year as f32 / 100.).floor() as u16
             + (year as f32 / 400.).floor() as u16
             + t[(month - 1) as usize]
-            + day as u16)
-            % 7) as usize
+            + day as u16
+        ) % 7) as usize
     }
 
     fn is_leap_year(x: u32) -> bool {

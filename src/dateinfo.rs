@@ -3,6 +3,7 @@ use std::fmt;
 use crate::month::Month;
 use crate::weekday::Weekday;
 
+
 pub struct FormattedDate<'a, 'b> {
     date: &'a DateInfo,
     format: &'b str,
@@ -44,6 +45,7 @@ impl<'a, 'b> fmt::Display for FormattedDate<'a, 'b> {
                             f.write_str(&year.to_string()[..3]);
                             is_expr = false;
                         },
+
                         'M' => {
                             f.write_str(month.name());
                             is_expr = false;
@@ -57,6 +59,7 @@ impl<'a, 'b> fmt::Display for FormattedDate<'a, 'b> {
                             };
                             is_expr = false
                         },
+
                         'D' => {
                             f.write_str(weekday.name());
                             is_expr = false;
@@ -88,6 +91,7 @@ impl<'a, 'b> fmt::Display for FormattedDate<'a, 'b> {
                                 _ => { f.write_str("d"); },
                             };
                         },
+
                         'j' => {
                             match last_c {
                                 '%' => f.write_str(&day_of_year.to_string()),
@@ -95,6 +99,7 @@ impl<'a, 'b> fmt::Display for FormattedDate<'a, 'b> {
                                 _ => f.write_str("j"),
                             };
                         },
+                        
                         _ => { write!(f, "{}", c); },
                     }
                 } else { write!(f, "{}", c); }
