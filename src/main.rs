@@ -14,7 +14,7 @@ macro_rules! idate {
 }
 
 fn main() {
-    let num = 42433; // Friday, March 4th, 2016
+    let num = 42429; // Friday, March 4th, 2016
     let date = idate!(num);
 
     println!("{}", date.format(

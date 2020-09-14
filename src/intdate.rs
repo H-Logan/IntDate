@@ -35,6 +35,8 @@ impl IntDate {
         let mut month = "";
         let mut month_num: u8 = 1;
 
+        let mut last_length: u16 = 0;
+
         // month_number, month, month_length
         for (mn, (m, ml)) in Month::LENGTHS.iter().enumerate() {
             let mut length = *ml as u16;
@@ -45,12 +47,15 @@ impl IntDate {
                 break;
             }
 
-            length += (m.name() == "February"
-                && Self::is_leap_year(year.into())) as u16;
+            if m.name() == "February" && Self::is_leap_year(year)
+                { length = 29; }
 
             days -= length;
+
+            last_length = length;
         }
 
+        if days == 0 { days = last_length; }
         (month, month_num, days as u8)
     }
 
@@ -67,7 +72,7 @@ impl IntDate {
         ) % 7) as usize
     }
 
-    fn is_leap_year(x: u32) -> bool {
+    fn is_leap_year(x: u16) -> bool {
         (x % 4 == 0) && (x % 100 != 0) || (x % 400 == 0)
     }
 
