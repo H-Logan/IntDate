@@ -38,7 +38,7 @@ impl<'a, 'b> fmt::Display for FormattedDate<'a, 'b> {
                         '%' | '0' | '-' | '.' => { last_c = c; continue; },
 
                         'Y' => {
-                            f.write_str(&year.to_string());
+                            fmt::Display::fmt(&year, f)?;
                             is_expr = false;
                         },
                         'y' => {
@@ -54,7 +54,7 @@ impl<'a, 'b> fmt::Display for FormattedDate<'a, 'b> {
                             match last_c {
                                 '%' => f.write_str(&month.name()[..3]),
                                 '0' => write!(f, "{:0>2}", month.number()),
-                                '-' => f.write_str(&month.number().to_string()),
+                                '-' => fmt::Display::fmt(&month.number(), f),
                                 _ => f.write_str("m")
                             };
                             is_expr = false
@@ -74,7 +74,7 @@ impl<'a, 'b> fmt::Display for FormattedDate<'a, 'b> {
                                     }
                                 },
                                 '0' => { write!(f, "{:0>2}", day.to_string()); },
-                                '-' => { f.write_str(&day.to_string()); },
+                                '-' => { fmt::Display::fmt(&day, f); },
                                 '.' => {
                                     write!(f, "{}{}", day,
                                         match day
@@ -94,7 +94,7 @@ impl<'a, 'b> fmt::Display for FormattedDate<'a, 'b> {
 
                         'j' => {
                             match last_c {
-                                '%' => f.write_str(&day_of_year.to_string()),
+                                '%' => fmt::Display::fmt(&day_of_year, f),
                                 '0' => write!(f, "{:0>3}", day_of_year),
                                 _ => f.write_str("j"),
                             };
