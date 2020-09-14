@@ -19,7 +19,7 @@ impl IntDate {
         let mut years = 1_900;
 
         loop {
-            let leap_year = Self::is_leap_year(years) as u32;
+            let leap_year = if Self::is_leap_year(years) {1} else {0};
 
             if days <= 366 + leap_year { break; }
 
@@ -76,9 +76,8 @@ impl IntDate {
         let (month_name, month_num, day) = self.month();
 
         let month = Month::from_str(month_name).unwrap();
-        let weekday = Weekday::try_from(self.weekday(year, month_num, day))
-            .ok()
-            .unwrap();
+        let weekday = Weekday::try_from(
+            self.weekday(year, month_num, day)).unwrap();
 
         DateInfo {
             year,
