@@ -35,6 +35,7 @@ impl IntDate {
         let mut month = "";
         let mut month_num: u8 = 1;
 
+        let mut last_month = "";
         let mut last_length: u16 = 0;
 
         // month_number, month, month_length
@@ -53,9 +54,13 @@ impl IntDate {
             days -= length;
 
             last_length = length;
+            last_month = m.name();
         }
 
-        if days == 0 { days = last_length; }
+        if days < 1 {
+            days = last_length;
+            month = last_month;
+        }
         (month, month_num, days as u8)
     }
 
