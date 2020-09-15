@@ -41,15 +41,14 @@ impl IntDate {
         // month_number, month, month_length
         for (mn, (m, ml)) in Month::LENGTHS.iter().enumerate() {
             let mut length = *ml as u16;
+            if m.name() == "February" && Self::is_leap_year(year)
+                { length = 29; }
 
             if days < length {
                 month = m.name();
                 month_num = (mn + 1) as u8;
                 break;
             }
-
-            if m.name() == "February" && Self::is_leap_year(year)
-                { length = 29; }
 
             days -= length;
 

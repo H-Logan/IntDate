@@ -3,9 +3,6 @@ This crate converts integers to dates, similar to how it's done in Excel.
 
 Ex. `42,432 => March 3rd, 2016`
 
-# Disclaimer
-This project is still in development, and is not usable in its current state.
-
 ## Basic Usage
 ```Rust
 fn main() {
