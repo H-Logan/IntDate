@@ -1,11 +1,11 @@
 #![allow(unused)]
 
-mod dateinfo;
-mod intdate;
-mod month;
-mod weekday;
+pub mod dateinfo;
+pub mod intdate;
+pub mod month;
+pub mod weekday;
 
-use self::intdate::IntDate;
+pub use self::intdate::IntDate;
 
 #[macro_export]
 macro_rules! idate {
