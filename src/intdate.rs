@@ -64,7 +64,12 @@ impl IntDate {
         (month, month_num, days as u8)
     }
 
-    fn weekday(&self, mut year: u16, month: u8, day: u8) -> usize {
+    fn weekday(&self, mut year: u16, month: u8, mut day: u8) -> usize {
+        if self.is_stupid {
+            day -= (year == 1_900) as u8;
+            //day += (day == 0) as u8;
+        }
+
         let t = [0, 3, 2, 5, 0, 3, 5, 1, 4, 6, 2, 4];
         year -= (month < 3) as u16;
 
@@ -88,7 +93,8 @@ impl IntDate {
 
         let month = Month::from_str(month_name).unwrap();
         let weekday = Weekday::try_from(
-            self.weekday(year, month_num, day)).unwrap();
+            self.weekday(year, month_num, day)
+        ).unwrap();
 
         DateInfo {
             year,

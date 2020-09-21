@@ -65,13 +65,7 @@ impl<'a, 'b> fmt::Display for FormattedDate<'a, 'b> {
                     },
                     'd' => {
                         match last_c {
-                            '%' => {
-                                if weekday.name() == "Thursday" {
-                                    f.write_str(&weekday.name()[..5]);
-                                } else {
-                                    f.write_str(&weekday.name()[..3]);
-                                }
-                            },
+                            '%' => { f.write_str(&weekday.name()[..3]); },
                             '0' => { write!(f, "{:0>2}", day); },
                             '-' => { fmt::Display::fmt(&day, f); },
                             '.' => {
