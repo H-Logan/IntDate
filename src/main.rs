@@ -9,7 +9,7 @@ pub use self::intdate::IntDate;
 
 // Excel counts 1900 as a leap year, which is stupid.
 // therefore, to make this compatible with Excel for
-// January through March of 1900, $stupid must be true.
+// January through March of 1900, $is_stupid must be true.
 
 #[macro_export]
 macro_rules! idate {
@@ -19,7 +19,7 @@ macro_rules! idate {
 }
 
 fn main() {
-    let n = 42369;
+    let n = 366;
     let date = idate!(n, true);
     println!("{}", date.format("%m %-d, %Y - %D"));
 }
