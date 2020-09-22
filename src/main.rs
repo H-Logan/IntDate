@@ -134,12 +134,12 @@ fn main() {
         let stupid_date_string: &str =
             &date_stupid.format(format).to_string();
 
-        println!("{}____{}____{}\n",
+        println!("{}____{}{}",
             //date_real.format(format),
             *res,
             stupid_date_string,
             (if *res != stupid_date_string {
-                "ERROR"
+                "____ERROR"
             } else { "" }),
         );
     }

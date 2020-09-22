@@ -67,7 +67,7 @@ impl IntDate {
     fn weekday(&self, mut year: u16, month: u8, mut day: u8) -> usize {
         if self.is_stupid {
             day -= (year == 1_900) as u8;
-            //day += (day == 0) as u8;
+            print!("Day: {}, Month: {}, Year: {},\t\t", day, month, year);
         }
 
         let t = [0, 3, 2, 5, 0, 3, 5, 1, 4, 6, 2, 4];
@@ -79,6 +79,7 @@ impl IntDate {
             + (year as f32 / 400.).floor() as u16
             + t[(month - 1) as usize]
             + day as u16
+            + (year == 1_900 && self.is_stupid) as u16
         ) % 7) as usize
     }
 
