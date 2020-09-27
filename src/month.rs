@@ -1,6 +1,5 @@
 use std::fmt;
 
-
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
 pub enum Month {
     January,
@@ -25,7 +24,7 @@ impl core::str::FromStr for Month {
     type Err = ();
     fn from_str(input: &str) -> Result<Self, Self::Err> {
         if input.len() == 3 {
-            Ok( match () {
+            Ok(match () {
                 _ if input.eq_ignore_ascii_case(&Self::January.name()[..3])
                     => Self::January,
 

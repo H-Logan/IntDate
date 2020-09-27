@@ -3,7 +3,7 @@ use std::fmt;
 use crate::month::Month;
 use crate::weekday::Weekday;
 
-
+#[derive(Debug)]
 pub struct FormattedDate<'a, 'b> {
     date: &'a DateInfo,
     format: &'b str,
@@ -30,46 +30,60 @@ impl<'a, 'b> fmt::Display for FormattedDate<'a, 'b> {
                 continue;
             }
             escape_next = c == '\\';
-            if c == '%' { is_expr = true; }
+            if c == '%' {
+                is_expr = true;
+            }
 
             if is_expr {
                 match c {
-                    '%' | '0' | '-' | '.' => { last_c = c; continue; },
+                    '%' | '0' | '-' | '.' => {
+                        last_c = c;
+                        continue;
+                    }
 
                     'Y' => {
                         fmt::Display::fmt(&year, f)?;
                         is_expr = false;
-                    },
+                    }
                     'y' => {
                         fmt::Display::fmt(&(year % 100), f);
                         is_expr = false;
-                    },
+                    }
 
                     'M' => {
                         f.write_str(month.name());
                         is_expr = false;
-                    },
+                    }
                     'm' => {
                         match last_c {
                             '%' => f.write_str(&month.name()[..3]),
                             '0' => write!(f, "{:0>2}", month.number()),
                             '-' => fmt::Display::fmt(&month.number(), f),
-                            _ => f.write_str("m")
+                            _ => f.write_str("m"),
                         };
                         is_expr = false
-                    },
+                    }
 
                     'D' => {
                         f.write_str(weekday.name());
                         is_expr = false;
-                    },
+                    }
                     'd' => {
                         match last_c {
-                            '%' => { f.write_str(&weekday.name()[..3]); },
-                            '0' => { write!(f, "{:0>2}", day); },
-                            '-' => { fmt::Display::fmt(&day, f); },
+                            '%' => {
+                                f.write_str(&weekday.name()[..3]);
+                            }
+                            '0' => {
+                                write!(f, "{:0>2}", day);
+                            }
+                            '-' => {
+                                fmt::Display::fmt(&day, f);
+                            }
                             '.' => {
-                                write!(f, "{}{}", day,
+                                write!(
+                                    f,
+                                    "{}{}",
+                                    day,
                                     match day
                                         .to_string()
                                         .chars()
@@ -79,12 +93,15 @@ impl<'a, 'b> fmt::Display for FormattedDate<'a, 'b> {
                                         '2' => "nd",
                                         '3' => "rd",
                                         _ => "th",
-                                    });
-                            },
-                            _ => { f.write_str("d"); },
+                                    }
+                                );
+                            }
+                            _ => {
+                                f.write_str("d");
+                            }
                         };
                         is_expr = false;
-                    },
+                    }
 
                     'j' => {
                         match last_c {
@@ -93,11 +110,15 @@ impl<'a, 'b> fmt::Display for FormattedDate<'a, 'b> {
                             _ => f.write_str("j"),
                         };
                         is_expr = false;
-                    },
-                    
-                    _ => { write!(f, "{}", c); },
+                    }
+
+                    _ => {
+                        write!(f, "{}", c);
+                    }
                 }
-            } else { write!(f, "{}", c); }
+            } else {
+                write!(f, "{}", c);
+            }
         }
         Ok(())
     }
@@ -114,6 +135,9 @@ pub struct DateInfo {
 }
 impl DateInfo {
     pub fn format<'b>(&self, input: &'b str) -> FormattedDate<'_, 'b> {
-        FormattedDate { date: self, format: input }
+        FormattedDate {
+            date: self,
+            format: input,
+        }
     }
 }
