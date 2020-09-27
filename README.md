@@ -1,3 +1,7 @@
+# DISCLAIMER:
+This branch of `IntDate` is used for testing possibly breaking features  
+or changes to the library. This contains code that will likely not compile or run.
+
 # IntDate
 This crate converts integers to dates, similar to how it's done in Excel.
 
