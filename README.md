@@ -63,3 +63,7 @@ from a `DateInfo` struct. Here are the expressions used for this function:
 |`%.d`|Suffixed day of month (eg. `16th`)
 |`%j`|Non-zero-padded day of year (eg. `69`)
 |`%0j`|Zero-padded day of year (eg. `069`)
+
+Expressions can also be escaped with backslashes, should it be needed:  
+`println!("{}", date.format("%M is 100\% my favorite month."));`  
+prints `October is 100% my favorite month.`
