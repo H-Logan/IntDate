@@ -40,3 +40,26 @@ fn main() {
 ```
 
 Output: `Monday, November 03, 2014`
+
+---
+
+## `DateInfo::format()`
+
+In the example above, `date.format()` is used when printing the output  
+from a `DateInfo` struct. Here are the expressions used for this function:  
+
+|Expr|Output|
+|---|---|
+|%Y|Four-digit year (eg. `1999`)
+|%y|Two-digit year (eg. `99`)
+|%M|Full month name (eg. `October`)
+|%m|Shortened month name (eg. `Oct`)
+|%0m|Zero-padded month number (eg. `03`)
+|%-m|Non-zero-padded month number (eg. `3`)
+|%D|Full weekday name (eg. `Saturday`)
+|%d|Shortened weekday name (eg. `Thu`)
+|%0d|Zero-padded day of month (eg. `03`)
+|%-d|Non-zero-padded day of month (eg. `3`)
+|%.d|Suffixed day of month (eg. `16th`)
+|%j|Non-zero-padded day of year (eg. `69`)
+|%0j|Zero-padded day of year (eg. `069`)
