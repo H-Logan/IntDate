@@ -1,3 +1,8 @@
+# Disclaimer
+This crate was made to improve my Rust skills, and therefore is not a  
+tried and tested tool for use in your projects. No testing has been done  
+to confirm how efficient, safe, or useful this library is.
+
 # IntDate
 This crate converts integers to dates, similar to how it's done in Excel.
 
